@@ -25,7 +25,7 @@ class CardPresenter : Presenter() {
         }
     }
     
-    override fun onDestroyViewHolder(viewHolder: ViewHolder) {
+    override fun onUnbindViewHolder(viewHolder: ViewHolder) {
         // 清理资源
     }
 }

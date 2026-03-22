@@ -1,5 +1,6 @@
 package com.mithrandiryee.wifiswitcher
 
+import android.os.Bundle
 import android.widget.Toast
 import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.widget.*
@@ -26,12 +27,6 @@ class TVBrowseFragment : BrowseSupportFragment(), OnItemViewClickedListener {
     }
     
     private fun loadRows() {
-        // WiFi状态行
-        val wifiHeader = HeaderItem(0, "当前状态")
-        val wifiAdapter = ArrayObjectAdapter(CardPresenter())
-        // 添加状态卡片
-        
-        // IP配置列表行
         val profilesHeader = HeaderItem(1, "IP配置")
         val profilesAdapter = ArrayObjectAdapter(CardPresenter())
         
@@ -40,9 +35,7 @@ class TVBrowseFragment : BrowseSupportFragment(), OnItemViewClickedListener {
             profilesAdapter.add(profile)
         }
         
-        rowsAdapter.add(ListRow(wifiHeader, wifiAdapter))
         rowsAdapter.add(ListRow(profilesHeader, profilesAdapter))
-        
         adapter = rowsAdapter
     }
     

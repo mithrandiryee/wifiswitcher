@@ -17,7 +17,7 @@
     <dimen name="text_size_label_medium">12sp</dimen>
     <dimen name="text_size_label_small">11sp</dimen>
     
-    <!-- Spacing & Padding -->
+    <!-- Spacing -->
     <dimen name="spacing_xsmall">4dp</dimen>
     <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_medium">16dp</dimen>
@@ -30,38 +30,21 @@
     <dimen name="screen_margin_vertical">16dp</dimen>
     <dimen name="screen_margin_large">24dp</dimen>
     
-    <!-- TV optimized margins (larger for better visibility) -->
-    <dimen name="tv_screen_margin_horizontal">32dp</dimen>
-    <dimen name="tv_screen_margin_vertical">24dp</dimen>
-    
-    <!-- Button Dimensions -->
+    <!-- Button -->
     <dimen name="button_min_height">56dp</dimen>
     <dimen name="button_min_width">88dp</dimen>
     <dimen name="button_corner_radius">12dp</dimen>
     <dimen name="button_padding_horizontal">24dp</dimen>
     <dimen name="button_padding_vertical">16dp</dimen>
-    <dimen name="button_text_size">@dimen/text_size_label_large</dimen>
+    <dimen name="button_text_size">14sp</dimen>
     
-    <!-- TV optimized buttons (larger touch targets) -->
-    <dimen name="tv_button_min_height">64dp</dimen>
-    <dimen name="tv_button_min_width">120dp</dimen>
-    <dimen name="tv_button_corner_radius">16dp</dimen>
-    <dimen name="tv_button_padding_horizontal">32dp</dimen>
-    <dimen name="tv_button_padding_vertical">20dp</dimen>
-    
-    <!-- Card Dimensions -->
+    <!-- Card -->
     <dimen name="card_corner_radius">16dp</dimen>
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="card_content_padding">16dp</dimen>
     <dimen name="card_margin">8dp</dimen>
     
-    <!-- TV optimized cards -->
-    <dimen name="tv_card_corner_radius">20dp</dimen>
-    <dimen name="tv_card_elevation">4dp</dimen>
-    <dimen name="tv_card_content_padding">24dp</dimen>
-    <dimen name="tv_card_margin">12dp</dimen>
-    
-    <!-- Input Field Dimensions -->
+    <!-- Input -->
     <dimen name="input_min_height">56dp</dimen>
     <dimen name="input_corner_radius">12dp</dimen>
     <dimen name="input_stroke_width">1dp</dimen>
@@ -70,63 +53,32 @@
     <dimen name="input_padding_vertical">16dp</dimen>
     <dimen name="input_label_margin_bottom">8dp</dimen>
     
-    <!-- TV optimized inputs -->
-    <dimen name="tv_input_min_height">64dp</dimen>
-    <dimen name="tv_input_corner_radius">16dp</dimen>
-    <dimen name="tv_input_stroke_width">2dp</dimen>
-    <dimen name="tv_input_stroke_width_focused">3dp</dimen>
-    
-    <!-- Switch Dimensions -->
+    <!-- Switch -->
     <dimen name="switch_min_width">52dp</dimen>
     <dimen name="switch_min_height">32dp</dimen>
     <dimen name="switch_thumb_size">24dp</dimen>
     <dimen name="switch_track_height">16dp</dimen>
     
-    <!-- TV optimized switches -->
-    <dimen name="tv_switch_min_width">64dp</dimen>
-    <dimen name="tv_switch_min_height">40dp</dimen>
-    <dimen name="tv_switch_thumb_size">32dp</dimen>
-    <dimen name="tv_switch_track_height">20dp</dimen>
-    
-    <!-- List Item Dimensions -->
+    <!-- List -->
     <dimen name="list_item_min_height">72dp</dimen>
     <dimen name="list_item_padding_horizontal">16dp</dimen>
     <dimen name="list_item_padding_vertical">16dp</dimen>
     <dimen name="list_item_icon_size">40dp</dimen>
     <dimen name="list_item_icon_margin_end">16dp</dimen>
     
-    <!-- TV optimized list items -->
-    <dimen name="tv_list_item_min_height">88dp</dimen>
-    <dimen name="tv_list_item_padding_horizontal">24dp</dimen>
-    <dimen name="tv_list_item_padding_vertical">20dp</dimen>
-    <dimen name="tv_list_item_icon_size">48dp</dimen>
-    <dimen name="tv_list_item_icon_margin_end">24dp</dimen>
-    
-    <!-- Toolbar Dimensions -->
+    <!-- Toolbar -->
     <dimen name="toolbar_min_height">64dp</dimen>
     <dimen name="toolbar_padding_horizontal">16dp</dimen>
     <dimen name="toolbar_icon_size">24dp</dimen>
     <dimen name="toolbar_title_margin_start">16dp</dimen>
     
-    <!-- TV optimized toolbar -->
-    <dimen name="tv_toolbar_min_height">80dp</dimen>
-    <dimen name="tv_toolbar_padding_horizontal">32dp</dimen>
-    <dimen name="tv_toolbar_icon_size">32dp</dimen>
-    <dimen name="tv_toolbar_title_margin_start">24dp</dimen>
-    
-    <!-- FAB Dimensions -->
+    <!-- FAB -->
     <dimen name="fab_size">56dp</dimen>
     <dimen name="fab_corner_radius">16dp</dimen>
     <dimen name="fab_icon_size">24dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     
-    <!-- TV optimized FAB -->
-    <dimen name="tv_fab_size">72dp</dimen>
-    <dimen name="tv_fab_corner_radius">20dp</dimen>
-    <dimen name="tv_fab_icon_size">32dp</dimen>
-    <dimen name="tv_fab_margin">24dp</dimen>
-    
-    <!-- Dialog Dimensions -->
+    <!-- Dialog -->
     <dimen name="dialog_corner_radius">28dp</dimen>
     <dimen name="dialog_padding">24dp</dimen>
     <dimen name="dialog_min_width">280dp</dimen>
@@ -135,88 +87,35 @@
     <dimen name="dialog_content_margin_bottom">24dp</dimen>
     <dimen name="dialog_action_margin_top">8dp</dimen>
     
-    <!-- TV optimized dialogs -->
-    <dimen name="tv_dialog_corner_radius">32dp</dimen>
-    <dimen name="tv_dialog_padding">32dp</dimen>
-    <dimen name="tv_dialog_min_width">400dp</dimen>
-    <dimen name="tv_dialog_max_width">720dp</dimen>
-    
-    <!-- Divider Dimensions -->
+    <!-- Divider -->
     <dimen name="divider_height">1dp</dimen>
     <dimen name="divider_inset">16dp</dimen>
     
-    <!-- TV optimized dividers -->
-    <dimen name="tv_divider_height">2dp</dimen>
-    <dimen name="tv_divider_inset">24dp</dimen>
-    
-    <!-- Icon Sizes -->
+    <!-- Icon -->
     <dimen name="icon_size_small">16dp</dimen>
     <dimen name="icon_size_medium">24dp</dimen>
     <dimen name="icon_size_large">32dp</dimen>
     <dimen name="icon_size_xlarge">48dp</dimen>
     
-    <!-- TV optimized icons -->
-    <dimen name="tv_icon_size_small">24dp</dimen>
-    <dimen name="tv_icon_size_medium">32dp</dimen>
-    <dimen name="tv_icon_size_large">40dp</dimen>
-    <dimen name="tv_icon_size_xlarge">56dp</dimen>
-    
-    <!-- Focus Ring Dimensions -->
+    <!-- Focus Ring -->
     <dimen name="focus_ring_width">2dp</dimen>
     <dimen name="focus_ring_offset">2dp</dimen>
     
-    <!-- TV optimized focus ring -->
-    <dimen name="tv_focus_ring_width">3dp</dimen>
-    <dimen name="tv_focus_ring_offset">3dp</dimen>
-    
-    <!-- WiFi Signal Strength Icon -->
+    <!-- WiFi Icon -->
     <dimen name="wifi_icon_size">24dp</dimen>
     <dimen name="wifi_icon_margin">8dp</dimen>
     
-    <!-- TV optimized WiFi icon -->
-    <dimen name="tv_wifi_icon_size">32dp</dimen>
-    <dimen name="tv_wifi_icon_margin">12dp</dimen>
-    
-    <!-- IP Configuration Card -->
-    <dimen name="ip_card_width">match_parent</dimen>
+    <!-- IP Card -->
     <dimen name="ip_card_min_height">120dp</dimen>
     <dimen name="ip_card_padding">16dp</dimen>
     <dimen name="ip_card_title_margin_bottom">8dp</dimen>
     <dimen name="ip_card_value_margin_bottom">4dp</dimen>
     
-    <!-- TV optimized IP card -->
-    <dimen name="tv_ip_card_min_height">160dp</dimen>
-    <dimen name="tv_ip_card_padding">24dp</dimen>
-    <dimen name="tv_ip_card_title_margin_bottom">12dp</dimen>
-    <dimen name="tv_ip_card_value_margin_bottom">6dp</dimen>
-    
-    <!-- Status Indicator -->
+    <!-- Status -->
     <dimen name="status_indicator_size">12dp</dimen>
     <dimen name="status_indicator_margin">8dp</dimen>
     
-    <!-- TV optimized status indicator -->
-    <dimen name="tv_status_indicator_size">16dp</dimen>
-    <dimen name="tv_status_indicator_margin">12dp</dimen>
-    
-    <!-- Animation Durations (not actual dimensions but related to UI) -->
-    <integer name="animation_duration_short">150</integer>
-    <integer name="animation_duration_medium">300</integer>
-    <integer name="animation_duration_long">500</integer>
-    
-    <!-- Elevation levels -->
-    <dimen name="elevation_level0">0dp</dimen>
-    <dimen name="elevation_level1">1dp</dimen>
-    <dimen name="elevation_level2">3dp</dimen>
-    <dimen name="elevation_level3">6dp</dimen>
-    <dimen name="elevation_level4">8dp</dimen>
-    <dimen name="elevation_level5">12dp</dimen>
-    
-    <!-- Touch target size (minimum recommended for accessibility) -->
+    <!-- Touch -->
     <dimen name="touch_target_min">48dp</dimen>
-    
-    <!-- TV optimized touch target -->
-    <dimen name="tv_touch_target_min">64dp</dimen>
-    
-    <!-- Active profile stroke width -->
     <dimen name="active_profile_stroke_width">3dp</dimen>
 </resources>
