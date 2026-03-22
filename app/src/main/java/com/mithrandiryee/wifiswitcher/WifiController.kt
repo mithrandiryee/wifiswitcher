@@ -32,7 +32,7 @@ class WifiController(private val context: Context) {
     }
 
     fun enableWifi(): Boolean {
-        if (!hasRequiredPermissions()) {
+        if (!checkBasicPermissions()) {
             return false
         }
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -52,7 +52,7 @@ class WifiController(private val context: Context) {
     }
 
     fun disableWifi(): Boolean {
-        if (!hasRequiredPermissions()) {
+        if (!checkBasicPermissions()) {
             return false
         }
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -65,18 +65,30 @@ class WifiController(private val context: Context) {
     }
 
     fun getConnectedSSID(): String? {
-        if (!hasRequiredPermissions()) {
-            Log.w(TAG, "No required permissions")
-            return null
-        }
-
+        Log.d(TAG, "getConnectedSSID called")
+        
         return try {
-            // 方法1: 使用 ConnectivityManager (Android 10+)
+            // 优先使用 WifiManager.connectionInfo (更可靠)
+            @Suppress("DEPRECATION")
+            val wifiInfo = wifiManager.connectionInfo
+            Log.d(TAG, "wifiInfo: $wifiInfo")
+            
+            if (wifiInfo != null) {
+                val ssid = wifiInfo.ssid
+                Log.d(TAG, "raw ssid: $ssid")
+                
+                if (ssid != null && ssid != "<unknown ssid>" && ssid != "0x" && ssid.isNotEmpty()) {
+                    val cleanSsid = ssid.trim('"')
+                    Log.d(TAG, "clean ssid: $cleanSsid")
+                    return cleanSsid
+                }
+            }
+            
+            // 备用: 使用 ConnectivityManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 getSSIDFromConnectivityManager()
             } else {
-                // 方法2: 使用 WifiManager.connectionInfo (Android 10以下)
-                getSSIDFromWifiManager()
+                null
             }
         } catch (e: Exception) {
             Log.e(TAG, "Error getting SSID", e)
@@ -85,76 +97,47 @@ class WifiController(private val context: Context) {
     }
 
     private fun getSSIDFromConnectivityManager(): String? {
+        Log.d(TAG, "getSSIDFromConnectivityManager called")
+        
         val activeNetwork = connectivityManager.activeNetwork ?: return null
         val networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return null
 
-        // 检查是否是WiFi连接
         if (!networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
             return null
         }
 
-        // Android 13+ 可以从 WifiInfo 获取
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val wifiInfo = networkCapabilities.transportInfo as? WifiInfo
-            val ssid = wifiInfo?.ssid
-            if (ssid != null && ssid != "<unknown ssid>" && ssid != "0x") {
-                return ssid.trim('"')
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            try {
+                val wifiInfo = networkCapabilities.transportInfo as? WifiInfo
+                val ssid = wifiInfo?.ssid
+                if (ssid != null && ssid != "<unknown ssid>" && ssid != "0x") {
+                    return ssid.trim('"')
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error getting transportInfo", e)
             }
-        }
-
-        // 备用方法: 尝试从 WifiManager 获取
-        @Suppress("DEPRECATION")
-        val wifiInfo = wifiManager.connectionInfo
-        val ssid = wifiInfo?.ssid
-        if (ssid != null && ssid != "<unknown ssid>" && ssid != "0x") {
-            return ssid.trim('"')
         }
 
         return null
     }
 
-    @Suppress("DEPRECATION")
-    private fun getSSIDFromWifiManager(): String? {
-        val wifiInfo = wifiManager.connectionInfo ?: return null
-        val ssid = wifiInfo.ssid
-
-        return if (ssid != null && ssid != "<unknown ssid>" && ssid != "0x") {
-            ssid.trim('"')
-        } else {
-            null
-        }
-    }
-
     fun getConnectedNetworkInfo(): ConnectedNetworkInfo? {
-        if (!hasRequiredPermissions()) {
-            return null
-        }
-
+        Log.d(TAG, "getConnectedNetworkInfo called")
+        
         return try {
-            val activeNetwork = connectivityManager.activeNetwork
-            val networkCapabilities = activeNetwork?.let { connectivityManager.getNetworkCapabilities(it) }
-
-            // 检查是否是WiFi连接
-            val isWifi = networkCapabilities?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
-
-            if (!isWifi) {
-                return ConnectedNetworkInfo(
-                    ssid = null,
-                    ipAddress = null,
-                    isConnected = false
-                )
-            }
-
-            // 获取SSID
             val ssid = getConnectedSSID()
-
-            // 获取IP地址
+            Log.d(TAG, "ssid: $ssid")
+            
             val ipAddress = getIPAddress()
+            Log.d(TAG, "ipAddress: $ipAddress")
+
+            val isWifi = ssid != null || isWifiConnected()
+            Log.d(TAG, "isWifi: $isWifi")
 
             ConnectedNetworkInfo(
                 ssid = ssid,
                 ipAddress = ipAddress,
-                isConnected = true
+                isConnected = isWifi
             )
         } catch (e: Exception) {
             Log.e(TAG, "Error getting network info", e)
@@ -162,12 +145,49 @@ class WifiController(private val context: Context) {
         }
     }
 
-    fun getIPAddress(): String? {
+    private fun isWifiConnected(): Boolean {
         return try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val activeNetwork = connectivityManager.activeNetwork
+                val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
+                capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+            } else {
+                @Suppress("DEPRECATION")
+                val networkInfo = connectivityManager.activeNetworkInfo
+                @Suppress("DEPRECATION")
+                networkInfo?.type == android.net.ConnectivityManager.TYPE_WIFI && networkInfo.isConnected
+            }
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    fun getIPAddress(): String? {
+        Log.d(TAG, "getIPAddress called")
+        return try {
+            // 方法1: 从 WifiManager 获取 (兼容性更好)
+            @Suppress("DEPRECATION")
+            val wifiInfo = wifiManager.connectionInfo
+            val ip = wifiInfo?.ipAddress
+            Log.d(TAG, "WifiManager ip: $ip")
+            
+            if (ip != null && ip != 0) {
+                val ipStr = String.format(
+                    "%d.%d.%d.%d",
+                    ip and 0xff,
+                    ip shr 8 and 0xff,
+                    ip shr 16 and 0xff,
+                    ip shr 24 and 0xff
+                )
+                Log.d(TAG, "IP from WifiManager: $ipStr")
+                return ipStr
+            }
+            
+            // 方法2: 从 ConnectivityManager 获取
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 getIPAddressFromConnectivityManager()
             } else {
-                getIPAddressFromWifiManager()
+                null
             }
         } catch (e: Exception) {
             Log.e(TAG, "Error getting IP address", e)
@@ -176,21 +196,14 @@ class WifiController(private val context: Context) {
     }
 
     private fun getIPAddressFromConnectivityManager(): String? {
+        Log.d(TAG, "getIPAddressFromConnectivityManager called")
+        
         val activeNetwork = connectivityManager.activeNetwork ?: return null
         val linkProperties = connectivityManager.getLinkProperties(activeNetwork) ?: return null
 
         for (linkAddress in linkProperties.linkAddresses) {
             val address = linkAddress.address
-            // 只返回IPv4地址
-            if (address is java.net.Inet4Address) {
-                return address.hostAddress
-            }
-        }
-
-        // 如果没有IPv4,返回IPv6
-        for (linkAddress in linkProperties.linkAddresses) {
-            val address = linkAddress.address
-            if (address is java.net.Inet6Address) {
+            if (address is java.net.Inet4Address && !address.isLoopbackAddress) {
                 return address.hostAddress
             }
         }
@@ -198,24 +211,8 @@ class WifiController(private val context: Context) {
         return null
     }
 
-    @Suppress("DEPRECATION")
-    private fun getIPAddressFromWifiManager(): String? {
-        val wifiInfo = wifiManager.connectionInfo ?: return null
-        val ip = wifiInfo.ipAddress
-
-        if (ip == 0) return null
-
-        return String.format(
-            "%d.%d.%d.%d",
-            ip and 0xff,
-            ip shr 8 and 0xff,
-            ip shr 16 and 0xff,
-            ip shr 24 and 0xff
-        )
-    }
-
     fun getAvailableNetworks(): List<String> {
-        if (!hasRequiredPermissions()) {
+        if (!checkBasicPermissions()) {
             return emptyList()
         }
         return try {
@@ -227,7 +224,7 @@ class WifiController(private val context: Context) {
     }
 
     fun connectToNetwork(ssid: String, password: String?): Boolean {
-        if (!hasRequiredPermissions()) {
+        if (!checkBasicPermissions()) {
             return false
         }
         return try {
@@ -292,38 +289,36 @@ class WifiController(private val context: Context) {
     }
 
     fun getCurrentWifiInfo(): WifiInfo? {
-        if (!hasRequiredPermissions()) {
-            return null
-        }
         return try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                val activeNetwork = connectivityManager.activeNetwork
-                val capabilities = activeNetwork?.let { connectivityManager.getNetworkCapabilities(it) }
-                capabilities?.transportInfo as? WifiInfo
-            } else {
-                @Suppress("DEPRECATION")
-                wifiManager.connectionInfo
-            }
+            @Suppress("DEPRECATION")
+            wifiManager.connectionInfo
         } catch (e: Exception) {
             null
         }
     }
 
-    fun hasRequiredPermissions(): Boolean {
-        val locationPermission = ContextCompat.checkSelfPermission(
-            context, Manifest.permission.ACCESS_FINE_LOCATION
+    private fun checkBasicPermissions(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            context, Manifest.permission.ACCESS_WIFI_STATE
         ) == PackageManager.PERMISSION_GRANTED
+    }
 
-        val wifiPermission = ContextCompat.checkSelfPermission(
+    fun hasRequiredPermissions(): Boolean {
+        val wifiState = ContextCompat.checkSelfPermission(
             context, Manifest.permission.ACCESS_WIFI_STATE
         ) == PackageManager.PERMISSION_GRANTED
 
+        val location = ContextCompat.checkSelfPermission(
+            context, Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            locationPermission && wifiPermission && ContextCompat.checkSelfPermission(
+            val nearby = ContextCompat.checkSelfPermission(
                 context, Manifest.permission.NEARBY_WIFI_DEVICES
             ) == PackageManager.PERMISSION_GRANTED
+            wifiState && (location || nearby)
         } else {
-            locationPermission && wifiPermission
+            wifiState
         }
     }
 
