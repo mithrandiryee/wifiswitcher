@@ -116,8 +116,10 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun updateCurrentStatus() {
-        val ssid = wifiController.getConnectedSSID()
-        val ipAddress = ipConfigurator.getCurrentIPConfiguration()?.ipAddress
+        val networkInfo = wifiController.getConnectedNetworkInfo()
+        
+        val ssid = networkInfo?.ssid
+        val ipAddress = networkInfo?.ipAddress
 
         binding.tvWifiSsid.text = ssid ?: getString(R.string.no_connection)
         binding.tvIpAddress.text = ipAddress ?: getString(R.string.ip_not_available)
