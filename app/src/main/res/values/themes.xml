@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme -->
+    <style name="Theme.WiFiSwitcher" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</item>
+        
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/md_theme_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_onSecondaryContainer</item>
+        
+        <!-- Tertiary brand color -->
+        <item name="colorTertiary">@color/md_theme_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_onTertiaryContainer</item>
+        
+        <!-- Error colors -->
+        <item name="colorError">@color/md_theme_error</item>
+        <item name="colorOnError">@color/md_theme_onError</item>
+        <item name="colorErrorContainer">@color/md_theme_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/md_theme_onErrorContainer</item>
+        
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/md_theme_background</item>
+        <item name="colorOnBackground">@color/md_theme_onBackground</item>
+        
+        <!-- Surface colors -->
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</item>
+        
+        <!-- Outline colors -->
+        <item name="colorOutline">@color/md_theme_outline</item>
+        <item name="colorOutlineVariant">@color/md_theme_outlineVariant</item>
+        
+        <!-- Inverse colors -->
+        <item name="colorInverseSurface">@color/md_theme_inverseSurface</item>
+        <item name="colorInverseOnSurface">@color/md_theme_inverseOnSurface</item>
+        <item name="colorInversePrimary">@color/md_theme_inversePrimary</item>
+        
+        <!-- Text colors -->
+        <item name="android:textColorPrimary">@color/md_theme_onSurface</item>
+        <item name="android:textColorSecondary">@color/md_theme_onSurfaceVariant</item>
+        <item name="android:textColorTertiary">@color/md_theme_outline</item>
+        
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        
+        <!-- Default style for widgets -->
+        <item name="materialButtonStyle">@style/Widget.WiFiSwitcher.Button</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.WiFiSwitcher.Button.Outlined</item>
+        <item name="materialCardViewStyle">@style/Widget.WiFiSwitcher.CardView</item>
+        <item name="textInputStyle">@style/Widget.WiFiSwitcher.TextInputLayout</item>
+    </style>
+    
+    <!-- TV optimized theme -->
+    <style name="Theme.WiFiSwitcher.TV" parent="Theme.WiFiSwitcher">
+        <!-- Larger focus indicators for TV -->
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        
+        <!-- TV-specific surface colors -->
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+    </style>
+    
+    <!-- Button styles -->
+    <style name="Widget.WiFiSwitcher.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:minHeight">@dimen/button_min_height</item>
+        <item name="android:textSize">@dimen/text_size_body_large</item>
+        <item name="android:paddingStart">@dimen/button_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/button_padding_horizontal</item>
+    </style>
+    
+    <style name="Widget.WiFiSwitcher.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:minHeight">@dimen/button_min_height</item>
+        <item name="android:textSize">@dimen/text_size_body_large</item>
+        <item name="android:paddingStart">@dimen/button_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/button_padding_horizontal</item>
+    </style>
+    
+    <style name="Widget.WiFiSwitcher.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:minHeight">@dimen/button_min_height</item>
+        <item name="android:textSize">@dimen/text_size_body_large</item>
+        <item name="android:paddingStart">@dimen/button_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/button_padding_horizontal</item>
+    </style>
+    
+    <!-- Card styles -->
+    <style name="Widget.WiFiSwitcher.CardView" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="contentPadding">@dimen/card_content_padding</item>
+    </style>
+    
+    <style name="Widget.WiFiSwitcher.CardView.Outlined" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">0dp</item>
+        <item name="contentPadding">@dimen/card_content_padding</item>
+    </style>
+    
+    <!-- TextInputLayout styles -->
+    <style name="Widget.WiFiSwitcher.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/input_corner_radius</item>
+        <item name="android:minHeight">@dimen/input_min_height</item>
+        <item name="boxStrokeWidth">@dimen/input_stroke_width</item>
+        <item name="boxStrokeWidthFocused">@dimen/input_stroke_width_focused</item>
+    </style>
+    
+    <!-- Switch styles -->
+    <style name="Widget.WiFiSwitcher.Switch" parent="Widget.Material3.CompoundButton.Switch">
+        <item name="android:minWidth">@dimen/switch_min_width</item>
+        <item name="android:minHeight">@dimen/switch_min_height</item>
+    </style>
+    
+    <!-- Toolbar styles -->
+    <style name="Widget.WiFiSwitcher.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:minHeight">@dimen/toolbar_min_height</item>
+        <item name="titleTextAppearance">@style/TextAppearance.WiFiSwitcher.TitleLarge</item>
+    </style>
+    
+    <!-- Text appearance styles -->
+    <style name="TextAppearance.WiFiSwitcher.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">@dimen/text_size_title_large</item>
+    </style>
+    
+    <style name="TextAppearance.WiFiSwitcher.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">@dimen/text_size_title_medium</item>
+    </style>
+    
+    <style name="TextAppearance.WiFiSwitcher.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">@dimen/text_size_body_large</item>
+    </style>
+    
+    <style name="TextAppearance.WiFiSwitcher.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/text_size_body_medium</item>
+    </style>
+    
+    <!-- List item styles -->
+    <style name="Widget.WiFiSwitcher.ListItem" parent="Widget.Material3.ListItem">
+        <item name="android:minHeight">@dimen/list_item_min_height</item>
+        <item name="android:paddingStart">@dimen/list_item_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/list_item_padding_horizontal</item>
+    </style>
+    
+    <!-- FAB styles -->
+    <style name="Widget.WiFiSwitcher.FAB" parent="Widget.Material3.FAB">
+        <item name="fabSize">normal</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.WiFiSwitcher.FAB</item>
+    </style>
+    
+    <style name="ShapeAppearance.WiFiSwitcher.FAB" parent="ShapeAppearance.Material3.FAB">
+        <item name="cornerSize">@dimen/fab_corner_radius</item>
+    </style>
+    
+    <!-- Toolbar overlay theme -->
+    <style name="Theme.WiFiSwitcher.AppBarOverlay" parent="ThemeOverlay.Material3.Dark.ActionBar">
+        <!-- Customize toolbar color -->
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+    </style>
+    
+    <!-- Popup overlay theme -->
+    <style name="Theme.WiFiSwitcher.PopupOverlay" parent="ThemeOverlay.Material3.Light">
+        <!-- Customize popup menu colors -->
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+    </style>
+</resources>
