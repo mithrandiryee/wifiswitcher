@@ -1,0 +1,4 @@
+<resources>
+    <string name="device_type">电视</string>
+    <string name="navigation_hint">使用遥控器方向键导航,确认键选择</string>
+</resources>

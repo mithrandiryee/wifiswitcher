@@ -22,6 +22,35 @@ android {
         }
     }
 
+    flavorDimensions "device"
+    productFlavors {
+        mobile {
+            dimension "device"
+            applicationIdSuffix ".mobile"
+            versionNameSuffix "-mobile"
+            buildConfigField "boolean", "IS_TV", "false"
+            resValue "string", "app_mode", "手机模式"
+        }
+        tv {
+            dimension "device"
+            applicationIdSuffix ".tv"
+            versionNameSuffix "-tv"
+            buildConfigField "boolean", "IS_TV", "true"
+            resValue "string", "app_mode", "电视模式"
+        }
+    }
+
+    sourceSets {
+        mobile {
+            res.srcDirs = ['src/main/res', 'src/mobile/res']
+            java.srcDirs = ['src/main/java', 'src/mobile/java']
+        }
+        tv {
+            res.srcDirs = ['src/main/res', 'src/tv/res']
+            java.srcDirs = ['src/main/java', 'src/tv/java']
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -43,4 +72,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation 'com.google.code.gson:gson:2.10.1'
+
+    tvImplementation 'androidx.leanback:leanback:1.0.0'
 }

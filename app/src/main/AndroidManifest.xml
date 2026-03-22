@@ -11,6 +11,14 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <!-- TV支持 -->
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -33,6 +41,17 @@
             android:name=".AddProfileActivity"
             android:exported="false"
             android:label="添加IP配置" />
+
+        <!-- TV Activity -->
+        <activity
+            android:name=".TVMainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.WiFiSwitcher.TV">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 </manifest>
